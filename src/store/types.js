@@ -1,0 +1,5 @@
+export const SET_US_MAP_LOADING_STATUS = 'us-map/SET_LOADING_STATUS'
+export const SET_US_MAP_ERROR = 'us-map/SET_ERROR'
+export const FETCH_US_MAP_DATA = 'us-map/FETCH_DATA'
+export const SET_US_MAP_DATA = 'us-map/SET_DATA'
+export const INITIALIZE_US_MAP_VARS = 'us-map/INITIALIZE_VARS'
