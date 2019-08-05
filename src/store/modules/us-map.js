@@ -1,11 +1,13 @@
 import * as types from '@/store/types'
-// import * as d3 from 'd3'
+import * as d3 from 'd3'
 
 const state = {
   data: [],
   width: '',
   height: '',
   center: [],
+  projection: {},
+  path: {},
   loading: false,
   error: null
 }
@@ -31,6 +33,16 @@ const mutations = {
     d3.select('#us-map svg')
       .attr('width', state.width)
       .attr('height', state.height)
+  },
+  [types.APPLY_US_MAP_PROJECTION]: state => {
+    /* Define projection */
+    state.projection = d3.geoAlbersUsa()
+      .scale(1280)
+      .translate(state.center)
+ 
+     /* Apply projection */
+    state.path = d3.geoPath()
+      .projection(state.projection)
   }
 }
 
