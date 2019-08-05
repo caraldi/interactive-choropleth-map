@@ -6,3 +6,6 @@ export const SET_US_MAP_ATTRIBUTES = 'us-map/SET_ATTRIBUTES'
 export const APPLY_US_MAP_PROJECTION = 'us-map/APPLY_PROJECTION'
 export const LOAD_US_COUNTIES = 'us-map/LOAD_COUNTIES'
 export const LOAD_US_STATES = 'us-map/LOAD_STATES'
+
+export const FETCH_US_COMMUTE_DATA = 'us-commute/FETCH_DATA'
+export const SET_US_COMMUTE_DATA = 'us-commute/SET_DATA'
