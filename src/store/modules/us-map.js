@@ -1,6 +1,7 @@
 import * as types from '@/store/types'
 import client from 'api-client'
 import * as d3 from 'd3'
+import * as topojson from 'topojson-client'
 
 const state = {
   data: {},
@@ -44,6 +45,18 @@ const mutations = {
     /* Apply projection */
     state.path = d3.geoPath()
       .projection(state.projection)
+  },
+  [types.LOAD_US_COUNTIES]: state => {
+    d3.select('#us-map svg g.us g.us__counties')
+      .selectAll('path')
+      .data(topojson.feature(state.data, state.data.objects.counties).features)
+      .enter().append('path')
+      .attr('d', state.path)
+  },
+  [types.LOAD_US_STATES]: state => {
+    d3.select('#us-map svg g.us path.us__states')
+      .datum(topojson.mesh(state.data, state.data.objects.states, (a, b) => a !== b))
+      .attr('d', state.path)
   }
 }
 
@@ -51,10 +64,11 @@ const actions = {
   [types.FETCH_US_MAP_DATA]: async (context) => {
     await client.fetchUsMapData()
       .then(response => {
-        console.log('fetchUsMapData() returned ', response)
         context.commit(types.SET_US_MAP_DATA, response)
         context.commit(types.SET_US_MAP_ATTRIBUTES)
         context.commit(types.APPLY_US_MAP_PROJECTION)
+        context.commit(types.LOAD_US_COUNTIES)
+        context.commit(types.LOAD_US_STATES)
       })
       .catch(error => context.commit(types.SET_US_MAP_ERROR, error.message))
   }
