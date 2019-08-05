@@ -8,6 +8,6 @@ const fetch = (promise, time) => {
 
 export default {
   fetchUsMapData () {
-    return Promise(fetch(us, 1000))
+    return fetch(us, 1000)
   }
 }
