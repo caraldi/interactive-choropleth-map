@@ -3,6 +3,9 @@ import * as types from '@/store/types'
 
 const state = {
   data: [],
+  width: '',
+  height: '',
+  center: [],
   loading: false,
   error: null
 }
@@ -15,36 +18,19 @@ const mutations = {
   [types.SET_US_MAP_LOADING_STATUS]: state => (state.loading = !state.loading),
   [types.SET_US_MAP_DATA]: (state, payload) => (state.data === payload),
   [types.SET_US_MAP_ERROR]: state => state.error,
-  [types.INITIALIZE_US_MAP_VARS]: state => {
-    /*
-     * From the Flowing Data tutorial "Making an Interactive Map with Category Filters" by Nathan Yau
-     * Source: flowingdata.com/2019/06/18/getting-started-with-d3/
-     */
-
+  /*
+   * From the Flowing Data tutorial "Making an Interactive Map with Category Filters" by Nathan Yau
+   * Source: flowingdata.com/2019/06/18/getting-started-with-d3/
+   */
+  [types.SET_US_MAP_ATTRIBUTES]: state => {
     /* Specify size of visualization and initialize variables */
-    // const width = 960
-    // const height = 600
-    // const center = [width / 2, height / 2]
-    // const defaultFillColor = '#e0e0e0'
+    state.width = 960
+    state.height = 600
+    state.center = [state.width / 2, state.height / 2]
 
-    // const commuteById = d3.map()
-
-    /* Define projection */
-    // const usProjection = d3.geoAlbersUsa()
-    //   .scale(1280)
-    //   .translate([width / 2, height / 2])
-
-    /* Apply projection */
-    // const path = d3.geoPath()
-    //   .projection(usProjection)
-
-    /* Create an svg object */
-    // const svg = d3.select('#us-map')
-    //   .append('svg')
-    //   .attr('width', width)
-    //   .attr('height', height)
-
-    // const g = svg.append('g')
+    d3.select('#us-map svg')
+      .attr('width', state.width)
+      .attr('height', state.height)
   }
 }
 

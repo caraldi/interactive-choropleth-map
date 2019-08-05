@@ -1,14 +1,8 @@
 <template>
   <div id="us-map">
-    <!--
-      us-map/UPDATE_DATA
-
-      const svg = d3.select('#us-map')
-         .append('svg')
-         .attr('width', width)
-         .attr('height', height)
-
-      const g = svg.append('g') -->
+    <svg>
+      <g class="us"></g>
+    </svg>
   </div>
 </template>
 
