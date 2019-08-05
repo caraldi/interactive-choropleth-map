@@ -69,6 +69,7 @@ const actions = {
         context.commit(types.APPLY_US_MAP_PROJECTION)
         context.commit(types.LOAD_US_COUNTIES)
         context.commit(types.LOAD_US_STATES)
+        context.dispatch(types.FETCH_US_COMMUTE_DATA, { root: true })
       })
       .catch(error => context.commit(types.SET_US_MAP_ERROR, error.message))
   }
