@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import * as types from '@/store/types'
 import USChoroplethMap from '@/components/USChoroplethMap'
 
 export default {
@@ -15,6 +16,9 @@ export default {
   },
   props: {
     msg: String
+  },
+  created () {
+    return this.$store.dispatch(types.FETCH_US_MAP_DATA)
   }
 }
 </script>

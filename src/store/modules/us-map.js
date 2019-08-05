@@ -1,8 +1,9 @@
 import * as types from '@/store/types'
+import client from 'api-client'
 import * as d3 from 'd3'
 
 const state = {
-  data: [],
+  data: {},
   width: '',
   height: '',
   center: [],
@@ -18,7 +19,7 @@ const getters = {
 
 const mutations = {
   [types.SET_US_MAP_LOADING_STATUS]: state => (state.loading = !state.loading),
-  [types.SET_US_MAP_DATA]: (state, payload) => (state.data === payload),
+  [types.SET_US_MAP_DATA]: (state, payload) => (state.data = payload),
   [types.SET_US_MAP_ERROR]: state => state.error,
   /*
    * From the Flowing Data tutorial "Making an Interactive Map with Category Filters" by Nathan Yau
@@ -39,17 +40,24 @@ const mutations = {
     state.projection = d3.geoAlbersUsa()
       .scale(1280)
       .translate(state.center)
- 
-     /* Apply projection */
+
+    /* Apply projection */
     state.path = d3.geoPath()
       .projection(state.projection)
   }
 }
 
 const actions = {
-  // [types.FETCH_US_MAP_DATA]: {
-
-  // }
+  [types.FETCH_US_MAP_DATA]: async (context) => {
+    await client.fetchUsMapData()
+      .then(response => {
+        console.log('fetchUsMapData() returned ', response)
+        context.commit(types.SET_US_MAP_DATA, response)
+        context.commit(types.SET_US_MAP_ATTRIBUTES)
+        context.commit(types.APPLY_US_MAP_PROJECTION)
+      })
+      .catch(error => context.commit(types.SET_US_MAP_ERROR, error.message))
+  }
 }
 
 export default {
