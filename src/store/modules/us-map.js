@@ -52,6 +52,7 @@ const mutations = {
       .data(topojson.feature(state.data, state.data.objects.counties).features)
       .enter().append('path')
       .attr('d', state.path)
+      .attr('id', function (d) { return d.id })
   },
   [types.LOAD_US_STATES]: state => {
     d3.select('#us-map svg g.us g.us__states')
@@ -59,6 +60,7 @@ const mutations = {
       .data(topojson.feature(state.data, state.data.objects.states).features)
       .enter().append('path')
       .attr('d', state.path)
+      .attr('id', function (d) { return d.id })
   }
 }
 
