@@ -54,8 +54,10 @@ const mutations = {
       .attr('d', state.path)
   },
   [types.LOAD_US_STATES]: state => {
-    d3.select('#us-map svg g.us path.us__states')
-      .datum(topojson.mesh(state.data, state.data.objects.states, (a, b) => a !== b))
+    d3.select('#us-map svg g.us g.us__states')
+      .selectAll('path')
+      .data(topojson.feature(state.data, state.data.objects.states).features)
+      .enter().append('path')
       .attr('d', state.path)
   }
 }

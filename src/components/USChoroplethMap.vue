@@ -3,7 +3,7 @@
     <svg>
       <g class="us">
         <g class="us__counties"/>
-        <path class="us__states"/>
+        <g class="us__states"/>
       </g>
     </svg>
   </div>
