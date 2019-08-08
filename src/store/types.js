@@ -9,3 +9,4 @@ export const LOAD_US_STATES = 'us-map/LOAD_STATES'
 
 export const FETCH_US_COMMUTE_DATA = 'us-commute/FETCH_DATA'
 export const SET_US_COMMUTE_DATA = 'us-commute/SET_DATA'
+export const APPLY_COLOR_SCALE_TO_FILTERED_COMMUTE_DATA = 'us-commute/APPLY_COLOR_SCALE'
